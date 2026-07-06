@@ -60,6 +60,7 @@ class Response(Selector):
         adaptive_domain: str = cast(str, selector_config.pop("adaptive_domain", ""))
         self.status = status
         self.reason = reason
+        self.method = method
         self.cookies = cookies
         self.headers = headers
         self.request_headers = request_headers

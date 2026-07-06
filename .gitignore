@@ -108,3 +108,7 @@ output/*/index.html
 docs/_build
 public/
 web/
+
+# local install marker
+.scrapling_dependencies_installed
+
