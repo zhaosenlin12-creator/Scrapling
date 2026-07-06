@@ -93,7 +93,9 @@ class SessionManager:
 
     async def close(self) -> None:
         """Close all registered sessions."""
-        for session in self._sessions.values():
+        for sid, session in self._sessions.items():
+            if sid in self._lazy_sessions and not session._is_alive:
+                continue
             _ = await session.__aexit__(None, None, None)
 
         self._started = False

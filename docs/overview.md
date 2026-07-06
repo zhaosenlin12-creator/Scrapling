@@ -263,19 +263,19 @@ page = Fetcher.get('https://scrapling.requestcatcher.com/get', impersonate="chro
 ```
 With that out of the way, here's how to do all HTTP methods:
 ```python
->>> from scrapling.fetchers import Fetcher
->>> page = Fetcher.get('https://scrapling.requestcatcher.com/get', stealthy_headers=True)
->>> page = Fetcher.post('https://scrapling.requestcatcher.com/post', data={'key': 'value'}, proxy='http://username:password@localhost:8030')
->>> page = Fetcher.put('https://scrapling.requestcatcher.com/put', data={'key': 'value'})
->>> page = Fetcher.delete('https://scrapling.requestcatcher.com/delete')
+from scrapling.fetchers import Fetcher
+page = Fetcher.get('https://scrapling.requestcatcher.com/get', stealthy_headers=True)
+page = Fetcher.post('https://scrapling.requestcatcher.com/post', data={'key': 'value'}, proxy='http://username:password@localhost:8030')
+page = Fetcher.put('https://scrapling.requestcatcher.com/put', data={'key': 'value'})
+page = Fetcher.delete('https://scrapling.requestcatcher.com/delete')
 ```
 For Async requests, you will replace the import like below:
 ```python
->>> from scrapling.fetchers import AsyncFetcher
->>> page = await AsyncFetcher.get('https://scrapling.requestcatcher.com/get', stealthy_headers=True)
->>> page = await AsyncFetcher.post('https://scrapling.requestcatcher.com/post', data={'key': 'value'}, proxy='http://username:password@localhost:8030')
->>> page = await AsyncFetcher.put('https://scrapling.requestcatcher.com/put', data={'key': 'value'})
->>> page = await AsyncFetcher.delete('https://scrapling.requestcatcher.com/delete')
+from scrapling.fetchers import AsyncFetcher
+page = await AsyncFetcher.get('https://scrapling.requestcatcher.com/get', stealthy_headers=True)
+page = await AsyncFetcher.post('https://scrapling.requestcatcher.com/post', data={'key': 'value'}, proxy='http://username:password@localhost:8030')
+page = await AsyncFetcher.put('https://scrapling.requestcatcher.com/put', data={'key': 'value'})
+page = await AsyncFetcher.delete('https://scrapling.requestcatcher.com/delete')
 ```
 
 !!! note "Notes:"
@@ -291,14 +291,13 @@ We have you covered if you deal with dynamic websites like most today!
 
 The `DynamicFetcher` class (formerly `PlayWrightFetcher`) offers many options for fetching and loading web pages using Chromium-based browsers.
 ```python
->>> from scrapling.fetchers import DynamicFetcher
->>> page = DynamicFetcher.fetch('https://www.google.com/search?q=%22Scrapling%22', disable_resources=True)  # Vanilla Playwright option
->>> page.css("#search a::attr(href)").get()
-'https://github.com/D4Vinci/Scrapling'
->>> # The async version of fetch
->>> page = await DynamicFetcher.async_fetch('https://www.google.com/search?q=%22Scrapling%22', disable_resources=True)
->>> page.css("#search a::attr(href)").get()
-'https://github.com/D4Vinci/Scrapling'
+from scrapling.fetchers import DynamicFetcher
+page = DynamicFetcher.fetch('https://quotes.toscrape.com/js/', disable_resources=True, block_ads=True)
+print(len(page.css(".quote")))  # -> 10
+
+# The async version of fetch
+page = await DynamicFetcher.async_fetch('https://quotes.toscrape.com/js/', disable_resources=True, block_ads=True)
+print(len(page.css(".quote")))  # -> 10
 ```
 It's built on top of [Playwright](https://playwright.dev/python/), and it's currently providing two main run options that can be mixed as you want:
 
@@ -323,18 +322,17 @@ Some of the things it does:
 6. and other anti-protection options...
 
 ```python
->>> from scrapling.fetchers import StealthyFetcher
->>> page = StealthyFetcher.fetch('https://www.browserscan.net/bot-detection')  # Running headless by default
->>> page.status == 200
-True
->>> page = StealthyFetcher.fetch('https://nopecha.com/demo/cloudflare', solve_cloudflare=True)  # Solve Cloudflare captcha automatically if presented
->>> page.status == 200
-True
->>> page = StealthyFetcher.fetch('https://www.browserscan.net/bot-detection', humanize=True, os_randomize=True) # and the rest of arguments...
->>> # The async version of fetch
->>> page = await StealthyFetcher.async_fetch('https://www.browserscan.net/bot-detection')
->>> page.status == 200
-True
+from scrapling.fetchers import StealthyFetcher
+page = StealthyFetcher.fetch('https://www.browserscan.net/bot-detection')  # Running headless by default
+page.status == 200  # -> True
+
+page = StealthyFetcher.fetch('https://nopecha.com/demo/cloudflare', solve_cloudflare=True)  # Solve Cloudflare captcha automatically if presented
+page.status == 200  # -> True
+
+page = StealthyFetcher.fetch('https://www.browserscan.net/bot-detection', block_webrtc=True, hide_canvas=True, dns_over_https=True) # and the rest of arguments...
+# The async version of fetch
+page = await StealthyFetcher.async_fetch('https://www.browserscan.net/bot-detection')
+page.status == 200  # -> True
 ```
 
 Again, this is just the tip of the iceberg with this fetcher. Check out the rest from [here](fetching/stealthy.md) for all details and the complete list of arguments.

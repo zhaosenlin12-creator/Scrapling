@@ -19,6 +19,7 @@ from scrapling.core._types import (
     Unpack,
     Optional,
     Awaitable,
+    ProxyType,
     SUPPORTED_HTTP_METHODS,
     FollowRedirects,
 )
@@ -149,6 +150,7 @@ class _ConfigurationLogic(ABC):
             # Browser session params (ignored by HTTP sessions)
             "extra_headers",
             "google_search",
+            "block_ads",
         }
         for k, v in method_kwargs.items():
             if k not in skip_keys and v is not None:
@@ -243,10 +245,11 @@ class _SyncSessionLogic(_ConfigurationLogic):
 
         try:
             for attempt in range(max_retries):
+                proxy: Optional[ProxyType]
                 if self._proxy_rotator and static_proxy is None:
                     proxy = self._proxy_rotator.get_proxy()
                 else:
-                    proxy = static_proxy
+                    proxy = static_proxy or self._default_proxy
 
                 request_args = self._merge_request_args(stealth=stealth, proxy=proxy, **kwargs)
                 try:
@@ -460,10 +463,11 @@ class _ASyncSessionLogic(_ConfigurationLogic):
         try:
             # Determine if we should use proxy rotation
             for attempt in range(max_retries):
+                proxy: Optional[ProxyType]
                 if self._proxy_rotator and static_proxy is None:
                     proxy = self._proxy_rotator.get_proxy()
                 else:
-                    proxy = static_proxy
+                    proxy = static_proxy or self._default_proxy
 
                 request_args = self._merge_request_args(stealth=stealth, proxy=proxy, **kwargs)
                 try:
@@ -718,8 +722,13 @@ class FetcherSession:
             config["selector_config"] = self.selector_config
             config["proxy_rotator"] = self._proxy_rotator
             self._client = _SyncSessionLogic(**config)
+            try:
+                result = self._client.__enter__()
+            except Exception:
+                self._client = None
+                raise
             self._is_alive = True
-            return self._client.__enter__()
+            return result
         raise RuntimeError("This FetcherSession instance already has an active synchronous session.")
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -739,8 +748,13 @@ class FetcherSession:
             config["selector_config"] = self.selector_config
             config["proxy_rotator"] = self._proxy_rotator
             self._client = _ASyncSessionLogic(**config)
+            try:
+                result = await self._client.__aenter__()
+            except Exception:
+                self._client = None
+                raise
             self._is_alive = True
-            return await self._client.__aenter__()
+            return result
         raise RuntimeError("This FetcherSession instance already has an active asynchronous session.")
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):

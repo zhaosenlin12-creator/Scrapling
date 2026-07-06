@@ -76,22 +76,19 @@ If I want to extract the Questions button from the old design, I can use a selec
 
 Now, let's test the same selector in both versions
 ```python
->> from scrapling import Fetcher
->> selector = '#hmenus > div:nth-child(1) > ul > li:nth-child(1) > a'
->> old_url = "https://web.archive.org/web/20100102003420/http://stackoverflow.com/"
->> new_url = "https://stackoverflow.com/"
->> Fetcher.configure(adaptive = True, adaptive_domain='stackoverflow.com')
->> 
->> page = Fetcher.get(old_url, timeout=30)
->> element1 = page.css(selector, auto_save=True)[0]
->> 
->> # Same selector but used in the updated website
->> page = Fetcher.get(new_url)
->> element2 = page.css(selector, adaptive=True)[0]
->> 
->> if element1.text == element2.text:
-...    print('Scrapling found the same element in the old and new designs!')
-'Scrapling found the same element in the old and new designs!'
+from scrapling import Fetcher
+selector = '#hmenus > div:nth-child(1) > ul > li:nth-child(1) > a'
+old_url = "https://web.archive.org/web/20100102003420/http://stackoverflow.com/"
+new_url = "https://stackoverflow.com/"
+Fetcher.configure(adaptive = True, adaptive_domain='stackoverflow.com')
+page = Fetcher.get(old_url, timeout=30)
+element1 = page.css(selector, auto_save=True)[0]
+# Same selector but used in the updated website
+page = Fetcher.get(new_url)
+element2 = page.css(selector, adaptive=True)[0]
+
+if element1.text == element2.text:
+    print('Scrapling found the same element in the old and new designs!')  # Spoiler alert: it does!
 ```
 Note that I introduced a new argument called `adaptive_domain`. This is because, for Scrapling, these are two different domains (`archive.org` and `stackoverflow.com`), so Scrapling will isolate their `adaptive` data. To inform Scrapling that they are the same website, we must pass the custom domain we wish to use while saving `adaptive` data for both, ensuring Scrapling doesn't isolate them.
 
@@ -141,11 +138,11 @@ First, you must enable the `adaptive` feature by passing `adaptive=True` to the 
 
 Examples:
 ```python
->>> from scrapling import Selector, Fetcher
->>> page = Selector(html_doc, adaptive=True)
+from scrapling import Selector, Fetcher
+page = Selector(html_doc, adaptive=True)
 # OR
->>> Fetcher.adaptive = True
->>> page = Fetcher.get('https://example.com')
+Fetcher.adaptive = True
+page = Fetcher.get('https://example.com')
 ```
 If you are using the [Selector](main_classes.md#selector) class, you need to pass the url of the website you are using with the argument `url` so Scrapling can separate the properties saved for each element by domain.
 
@@ -175,11 +172,11 @@ You manually save and retrieve an element, then relocate it, which all happens w
 
 First, let's say you got an element like this by text:
 ```python
->>> element = page.find_by_text('Tipping the Velvet', first_match=True)
+element = page.find_by_text('Tipping the Velvet', first_match=True)
 ```
 You can save its unique properties using the `save` method, as shown below, but you must set the identifier yourself. For this example, I chose `my_special_element` as an identifier, but it's best to use a meaningful identifier in your code for the same reason you use meaningful variable names :)
 ```python
->>> page.save(element, 'my_special_element')
+page.save(element, 'my_special_element')
 ```
 Now, later, when you want to retrieve it and relocate it inside the page with `adaptive`, it would be like this
 ```python

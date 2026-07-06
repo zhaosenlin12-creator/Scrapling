@@ -2,6 +2,7 @@ from pathlib import Path
 from subprocess import check_output
 from sys import executable as python_executable
 
+from scrapling import __version__
 from scrapling.core.utils import log
 from scrapling.engines.toolbelt.custom import Response
 from scrapling.core.utils._shell import _CookieParser, _ParseHeaders
@@ -10,7 +11,7 @@ from scrapling.core._types import List, Optional, Dict, Tuple, Any, Callable
 from orjson import loads as json_loads, JSONDecodeError
 
 try:
-    from click import command, option, Choice, group, argument
+    from click import command, option, Choice, group, argument, version_option
 except (ImportError, ModuleNotFoundError) as e:
     raise ModuleNotFoundError(
         "You need to install scrapling with any of the extras to enable Shell commands. See: https://scrapling.readthedocs.io/en/latest/#installation"
@@ -53,6 +54,8 @@ def __Request_and_Save(
     if not output_path.is_absolute():
         output_path = Path.cwd() / output_file
 
+    if ai_targeted:
+        kwargs.setdefault("block_ads", True)
     response = fetcher_func(url, **kwargs)
     Convertor.write_content_to_file(response, str(output_path), css_selector, main_content_only=ai_targeted)
     log.info(f"Content successfully saved to '{output_path}'")
@@ -154,10 +157,16 @@ def install(force):  # pragma: no cover
 @option(
     "--port", type=int, default=8000, help="The port to use if streamable-http transport is enabled (Default: 8000)"
 )
-def mcp(http, host, port):
+@option(
+    "--executable-path",
+    type=str,
+    default=None,
+    help="Path to a custom Chromium-compatible browser executable for browser-based MCP tools",
+)
+def mcp(http, host, port, executable_path):
     from scrapling.core.ai import ScraplingMCPServer
 
-    server = ScraplingMCPServer()
+    server = ScraplingMCPServer(executable_path=executable_path)
     server.serve(http, host, port)
 
 
@@ -308,6 +317,16 @@ def _common_browser_options(f):
             "--headless/--no-headless",
             default=True,
             help="Run browser in headless mode (default: True)",
+        ),
+        option(
+            "--dns-over-https/--no-dns-over-https",
+            default=False,
+            help="Route DNS through Cloudflare's DoH to prevent DNS leaks when using proxies (default: False)",
+        ),
+        option(
+            "--block-ads/--no-block-ads",
+            default=False,
+            help="Block requests to known ad and tracker domains (default: False)",
         ),
     ]
     for decorator in decorators:
@@ -498,6 +517,8 @@ def __build_browser_kwargs(
     real_chrome,
     proxy,
     parsed_headers,
+    dns_over_https,
+    block_ads,
 ) -> Dict[str, Any]:
     """Build shared kwargs dict for browser-based commands."""
     kwargs: Dict[str, Any] = {
@@ -507,6 +528,8 @@ def __build_browser_kwargs(
         "timeout": timeout,
         "locale": locale,
         "real_chrome": real_chrome,
+        "dns_over_https": dns_over_https,
+        "block_ads": block_ads,
     }
     if wait > 0:
         kwargs["wait"] = wait
@@ -538,6 +561,8 @@ def fetch(
     proxy,
     extra_headers,
     ai_targeted,
+    dns_over_https,
+    block_ads,
 ):
     """Opens up a browser and fetch content using DynamicFetcher."""
     parsed_headers, _ = _ParseHeaders(extra_headers, False)
@@ -552,6 +577,8 @@ def fetch(
         real_chrome,
         proxy,
         parsed_headers,
+        dns_over_https,
+        block_ads,
     )
     from scrapling.fetchers import DynamicFetcher
 
@@ -597,6 +624,8 @@ def stealthy_fetch(
     allow_webgl,
     hide_canvas,
     ai_targeted,
+    dns_over_https,
+    block_ads,
 ):
     """Opens up a browser with advanced stealth features and fetch content using StealthyFetcher."""
     parsed_headers, _ = _ParseHeaders(extra_headers, False)
@@ -611,6 +640,8 @@ def stealthy_fetch(
         real_chrome,
         proxy,
         parsed_headers,
+        dns_over_https,
+        block_ads,
     )
     kwargs.update(
         {
@@ -626,6 +657,7 @@ def stealthy_fetch(
 
 
 @group()
+@version_option(version=__version__, prog_name="Scrapling")
 def main():
     pass
 

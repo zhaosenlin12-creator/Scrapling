@@ -85,6 +85,24 @@ MySpider().start()
 <table>
   <tr>
     <td width="200">
+      <a href="https://proxidize.com/?utm_source=github&utm_medium=sponsorship&utm_campaign=scrapling&utm_content=d4vinci" target="_blank" title="Clean Proxies with No Nonsense.">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/proxidize.png">
+      </a>
+    </td>
+    <td> <a href="https://proxidize.com/?utm_source=github&utm_medium=sponsorship&utm_campaign=scrapling&utm_content=d4vinci" target="_blank"><b>Proxidize</b></a> は、スクレイピング、ブラウザ自動化、SEO監視、AIエージェント、データ収集のためのモバイルおよびレジデンシャルプロキシを提供します。<i>コード <b>scrapling20</b> で20%オフ</i>。
+    </td>
+  </tr>
+  <tr>
+    <td width="200">
+      <a href="https://coldproxy.com/" target="_blank" title="Residential, IPv6 & Datacenter Proxies for Web Scraping">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/coldproxy.png">
+      </a>
+    </td>
+    <td> <a href="https://coldproxy.com/" target="_blank"><b>ColdProxy</b></a> は、安定したウェブスクレイピング、公開データ収集、195以上の国・地域でのジオターゲティングテストのために、レジデンシャルおよびデータセンタープロキシを提供します。
+    </td>
+  </tr>
+  <tr>
+    <td width="200">
       <a href="https://hypersolutions.co/?utm_source=github&utm_medium=readme&utm_campaign=scrapling" target="_blank" title="Bot Protection Bypass API for Akamai, DataDome, Incapsula & Kasada">
         <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/HyperSolutions.png">
       </a>
@@ -130,16 +148,6 @@ MySpider().start()
   </tr>
   <tr>
     <td width="200">
-      <a href="https://www.nsocks.com/?keyword=2p67aivg" target="_blank" title="Scalable Web Data Access for AI Applications">
-        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/nsocks.png">
-      </a>
-    </td>
-    <td>
-    <a href="https://www.nsocks.com/?keyword=2p67aivg" target="_blank">Nsocks</a> は開発者やスクレイパー向けの高速なレジデンシャルおよび ISP プロキシを提供。グローバル IP カバレッジ、高い匿名性、スマートなローテーション、自動化とデータ抽出のための信頼性の高いパフォーマンス。<a href="https://www.xcrawl.com/?keyword=2p67aivg" target="_blank">Xcrawl</a> で大規模ウェブクローリングを簡素化。
-    </td>
-  </tr>
-  <tr>
-    <td width="200">
       <a href="https://petrosky.io/d4vinci" target="_blank" title="PetroSky delivers cutting-edge VPS hosting.">
         <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/petrosky.png">
       </a>
@@ -161,22 +169,32 @@ MySpider().start()
   </tr>
   <tr>
     <td width="200">
-      <a href="https://proxy-seller.com/?partner=CU9CAA5TBYFFT2" target="_blank" title="Proxy-Seller provides reliable proxy infrastructure for Web Scraping">
-        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/ProxySeller.png">
+      <a href="https://www.swiftproxy.net/?ref=D4Vinci" target="_blank" title="Scalable Solutions for Web Data Access">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/SwiftProxy.png">
       </a>
     </td>
     <td>
-    <a href="https://proxy-seller.com/?partner=CU9CAA5TBYFFT2" target="_blank">Proxy-Seller</a> は Web スクレイピング向けの信頼性の高いプロキシインフラを提供しています。IPv4、IPv6、ISP、レジデンシャル、モバイルプロキシに対応し、安定したパフォーマンス、幅広い地理的カバレッジ、企業規模のデータ収集に柔軟なプランを備えています。
+    <a href="https://www.swiftproxy.net/?ref=D4Vinci" target="_blank">Swiftproxy</a> は195カ国以上、8,000万以上のIPを備えたスケーラブルな住宅用プロキシを提供し、高速で信頼性の高い接続、自動ローテーション、強力なブロック回避性能を実現します。無料トライアルあり。
     </td>
   </tr>
   <tr>
     <td width="200">
-      <a href="http://mangoproxy.com/?utm_source=D4Vinci&utm_medium=GitHub&utm_campaign=D4Vinci" target="_blank" title="Proxies You Can Rely On: Residential, Server, and Mobile">
-        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/MangoProxy.png">
+      <a href="https://9proxy.com/pricing?tab=traffic&utm_source=Github&utm_campaign=D4vinci" target="_blank" title="Top-Tier Residential Proxy Solution for the Highest Success Rate">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/9proxy.jpg">
       </a>
     </td>
     <td>
-    <a href="http://mangoproxy.com/?utm_source=D4Vinci&utm_medium=GitHub&utm_campaign=D4Vinci" target="_blank">安定したプロキシ</a>。スクレイピング、自動化、マルチアカウント管理に対応。クリーンな IP、高速レスポンス、高負荷時でも信頼性の高いパフォーマンス。スケーラブルなワークフロー向けに設計。
+    <a href="https://9proxy.com/pricing?tab=traffic&utm_source=Github&utm_campaign=D4vinci" target="_blank">9Proxy</a> はIPあたり $0.018 またはGBあたり $0.68 からの住宅用プロキシを提供します。90カ国以上で2,000万以上のIPを保有。固定セッションまたはローテーションセッションをデスクトップまたはモバイルアプリで管理できます。
+    </td>
+  </tr>
+  <tr>
+    <td width="200">
+      <a href="https://go.nodemaven.com/scraplingjune" target="_blank" title="Proxies with the Highest IP Scores">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/NodeMaven.svg" width="240" height="100">
+      </a>
+    </td>
+    <td>
+    <a href="https://go.nodemaven.com/scraplingjune" target="_blank">NodeMaven</a> - 市場最高品質のIPを提供する信頼性の高いプロキシプロバイダー。プロモコード SCRAPLING35 でプロキシが35%割引になります。
     </td>
   </tr>
 </table>
@@ -191,7 +209,8 @@ MySpider().start()
 <a href="https://hasdata.com/?utm_source=github&utm_medium=banner&utm_campaign=D4Vinci" target="_blank" title="The web scraping service that actually beats anti-bot systems!"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/hasdata.png"></a>
 <a href="https://proxyempire.io/?ref=scrapling&utm_source=scrapling" target="_blank" title="Collect The Data Your Project Needs with the Best Residential Proxies"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/ProxyEmpire.png"></a>
 <a href="https://www.webshare.io/?referral_code=48r2m2cd5uz1" target="_blank" title="The Most Reliable Proxy with Unparalleled Performance"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/webshare.png"></a>
-<a href="https://www.crawleo.dev/?utm_source=github&utm_medium=sponsor&utm_campaign=scrapling" target="_blank" title="Supercharge your AI with Real-Time Web Intelligence"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/crawleo.png"></a>
+<a href="https://proxiware.com/?ref=scrapling" target="_blank" title="Collect Any Data. At Any Scale."><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/proxiware.png"></a>
+<a href="https://talordata.com/?campaignid=ZOYRsA4bX9BwWyO5&utm_source=D4Vinci&utm_term=Scrapling" target="_blank" title="Google SERP API for LLM, AI Agents & Full-Stack SEO"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/TalorData.jpg"></a>
 
 
 <!-- /sponsors -->
@@ -219,7 +238,8 @@ MySpider().start()
 - **アンチボット回避**：`StealthyFetcher` と fingerprint 偽装による高度なステルス機能。自動化で Cloudflare の Turnstile/Interstitial のすべてのタイプを簡単に回避。
 - **Session 管理**：リクエスト間で Cookie と状態を管理するための `FetcherSession`、`StealthySession`、`DynamicSession` クラスによる永続的な Session サポート。
 - **Proxy 回転**：すべての Session タイプに対応したラウンドロビンまたはカスタム戦略の組み込み `ProxyRotator`、さらにリクエストごとの Proxy オーバーライド。
-- **ドメインブロック**：ブラウザベースの Fetcher で特定のドメイン（およびそのサブドメイン）へのリクエストをブロック。
+- **ドメイン＆広告ブロック**：ブラウザベースの Fetcher で特定のドメイン（およびそのサブドメイン）へのリクエストをブロック、または内蔵広告ブロック（約3,500の既知の広告/トラッカードメイン）を有効化。
+- **DNS リーク防止**：Proxy 使用時の DNS リークを防ぐため、Cloudflare の DoH 経由で DNS クエリをルーティングするオプションの DNS-over-HTTPS サポート。
 - **async サポート**：すべての Fetcher および専用 async Session クラス全体での完全な async サポート。
 
 ### 適応型スクレイピングと AI 統合
@@ -457,7 +477,8 @@ Scrapling には Python 3.10 以上が必要です：
 pip install scrapling
 ```
 
-このインストールにはパーサーエンジンとその依存関係のみが含まれており、Fetcher やコマンドライン依存関係は含まれていません。
+> [!IMPORTANT]
+> このインストールにはパーサーエンジンとその依存関係のみが含まれており、Fetcher やコマンドライン依存関係は含まれていません。 そのため、このインストールのみでは、上記の例のように `scrapling.fetchers` や `scrapling.spiders` から何かをインポートすると `ModuleNotFoundError` が発生します。Fetcher や Spider を使用する場合は、以下のように、まず Fetcher の依存関係をインストールしてください。
 
 ### オプションの依存関係
 

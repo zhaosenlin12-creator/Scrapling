@@ -53,7 +53,7 @@ def _is_invalid_cdp_url(cdp_url: str) -> bool | str:
 # Type aliases for cleaner annotations
 PagesCount = Annotated[int, Meta(ge=1, le=50)]
 RetriesCount = Annotated[int, Meta(ge=1, le=10)]
-Seconds = Annotated[int, float, Meta(ge=0)]
+Seconds = Annotated[float, Meta(ge=0)]
 
 
 class PlaywrightConfig(Struct, kw_only=True, frozen=False, weakref=True):
@@ -71,6 +71,7 @@ class PlaywrightConfig(Struct, kw_only=True, frozen=False, weakref=True):
     wait: Seconds = 0
     timezone_id: str | None = ""
     page_action: Optional[Callable] = None
+    page_setup: Optional[Callable] = None
     proxy: Optional[str | Dict[str, str] | Tuple] = None  # The default value for proxy in Playwright's source is `None`
     proxy_rotator: Optional[ProxyRotator] = None
     extra_headers: Optional[Dict[str, str]] = None
@@ -85,15 +86,19 @@ class PlaywrightConfig(Struct, kw_only=True, frozen=False, weakref=True):
     useragent: Optional[str] = None
     extra_flags: Optional[List[str]] = None
     blocked_domains: Optional[Set[str]] = None
+    block_ads: bool = False
     retries: RetriesCount = 3
     retry_delay: Seconds = 1
     capture_xhr: str | None = None
     executable_path: Optional[str] = None
+    dns_over_https: bool = False
 
     def __post_init__(self):  # pragma: no cover
         """Custom validation after msgspec validation"""
         if self.page_action and not callable(self.page_action):
             raise TypeError(f"page_action must be callable, got {type(self.page_action).__name__}")
+        if self.page_setup and not callable(self.page_setup):
+            raise TypeError(f"page_setup must be callable, got {type(self.page_setup).__name__}")
         if self.proxy and self.proxy_rotator:
             raise ValueError(
                 "Cannot use 'proxy_rotator' together with 'proxy'. "
@@ -127,6 +132,14 @@ class PlaywrightConfig(Struct, kw_only=True, frozen=False, weakref=True):
             if validation_msg:
                 raise ValueError(validation_msg)
 
+        if self.block_ads:
+            from scrapling.engines.toolbelt.ad_domains import AD_DOMAINS
+
+            if self.blocked_domains:
+                self.blocked_domains = self.blocked_domains | set(AD_DOMAINS)
+            else:
+                self.blocked_domains = set(AD_DOMAINS)
+
 
 class StealthConfig(PlaywrightConfig, kw_only=True, frozen=False, weakref=True):
     allow_webgl: bool = True
@@ -150,6 +163,7 @@ class _fetch_params:
     timeout: Seconds
     wait: Seconds
     page_action: Optional[Callable]
+    page_setup: Optional[Callable]
     extra_headers: Optional[Dict[str, str]]
     disable_resources: bool
     wait_selector: Optional[str]

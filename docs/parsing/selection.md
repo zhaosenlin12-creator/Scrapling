@@ -362,8 +362,8 @@ Check examples to clear any confusion :)
 
 ### Examples
 ```python
->>> from scrapling.fetchers import Fetcher
->>> page = Fetcher.get('https://quotes.toscrape.com/')
+from scrapling.fetchers import Fetcher
+page = Fetcher.get('https://quotes.toscrape.com/')
 ```
 Find all elements with the tag name `div`.
 ```python

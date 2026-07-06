@@ -56,6 +56,12 @@ MySpider().start()
 
 <!-- sponsors -->
 <div style="text-align: center;">
+  <a href="https://proxidize.com/?utm_source=github&utm_medium=sponsorship&utm_campaign=scrapling&utm_content=d4vinci" target="_blank" title="Clean Proxies with No Nonsense.">
+    <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/proxidize.png" class="ad">
+  </a>
+  <a href="https://coldproxy.com/" target="_blank" title="Residential, IPv6 & Datacenter Proxies for Web Scraping">
+    <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/coldproxy.png" class="ad">
+  </a>
   <a href="https://hypersolutions.co/?utm_source=github&utm_medium=readme&utm_campaign=scrapling" target="_blank" title="Bot Protection Bypass API for Akamai, DataDome, Incapsula & Kasada">
     <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/HyperSolutions.png" class="ad">
   </a>
@@ -68,20 +74,20 @@ MySpider().start()
   <a href="https://tikhub.io/?utm_source=github.com/D4Vinci/Scrapling&utm_medium=marketing_social&utm_campaign=retargeting&utm_content=carousel_ad" target="_blank" title="Unlock the Power of Social Media Data & AI">
     <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/TikHub.jpg" class="ad">
   </a>
-  <a href="https://www.nsocks.com/?keyword=2p67aivg" target="_blank" title="Scalable Web Data Access for AI Applications">
-    <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/nsocks.png" class="ad">
-  </a>
   <a href="https://petrosky.io/d4vinci" target="_blank" title="PetroSky delivers cutting-edge VPS hosting.">
     <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/petrosky.png" class="ad">
   </a>
   <a href="https://substack.thewebscraping.club/p/scrapling-hands-on-guide?utm_source=github&utm_medium=repo&utm_campaign=scrapling" target="_blank" title="The #1 newsletter dedicated to Web Scraping">
     <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/TWSC.png" class="ad">
   </a>
-  <a href="https://proxy-seller.com/?partner=CU9CAA5TBYFFT2" target="_blank" title="Proxy-Seller provides reliable proxy infrastructure for Web Scraping">
-    <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/ProxySeller.png" class="ad">
+  <a href="https://www.swiftproxy.net/?ref=D4Vinci" target="_blank" title="Scalable Solutions for Web Data Access">
+    <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/SwiftProxy.png" class="ad">
   </a>
-  <a href="http://mangoproxy.com/?utm_source=D4Vinci&utm_medium=GitHub&utm_campaign=D4Vinci" target="_blank" title="Proxies You Can Rely On: Residential, Server, and Mobile">
-    <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/MangoProxy.png" class="ad">
+  <a href="https://9proxy.com/pricing?tab=traffic&utm_source=Github&utm_campaign=D4vinci" target="_blank" title="Top-Tier Residential Proxy Solution for the Highest Success Rate">
+    <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/9proxy.jpg" class="ad">
+  </a>
+  <a href="https://go.nodemaven.com/scraplingjune" target="_blank" title="Proxies with the Highest IP Scores">
+    <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/NodeMaven.svg" class="ad">
   </a>
   <br />
   <br />
@@ -109,7 +115,8 @@ MySpider().start()
 - **Anti-bot Bypass**: Advanced stealth capabilities with `StealthyFetcher` and fingerprint spoofing. Can easily bypass all types of Cloudflare's Turnstile/Interstitial with automation.
 - **Session Management**: Persistent session support with `FetcherSession`, `StealthySession`, and `DynamicSession` classes for cookie and state management across requests.
 - **Proxy Rotation**: Built-in `ProxyRotator` with cyclic or custom rotation strategies across all session types, plus per-request proxy overrides.
-- **Domain Blocking**: Block requests to specific domains (and their subdomains) in browser-based fetchers.
+- **Domain & Ad Blocking**: Block requests to specific domains (and their subdomains) or enable built-in ad blocking (~3,500 known ad/tracker domains) in browser-based fetchers.
+- **DNS Leak Prevention**: Optional DNS-over-HTTPS support to route DNS queries through Cloudflare's DoH, preventing DNS leaks when using proxies.
 - **Async Support**: Complete async support across all fetchers and dedicated async session classes.
 
 ### Adaptive Scraping & AI Integration
@@ -176,7 +183,9 @@ Scrapling requires Python 3.10 or higher:
 pip install scrapling
 ```
 
-This installation only includes the parser engine and its dependencies, without any fetchers or commandline dependencies.
+!!! warning
+
+    This installation only includes the parser engine and its dependencies, without any fetchers or commandline dependencies. So importing anything from `scrapling.fetchers` or `scrapling.spiders`, like in the examples above, will raise `ModuleNotFoundError` with this installation alone. If you are going to use any of the fetchers or spiders, install the fetchers' dependencies first as shown below.
 
 ### Optional Dependencies
 

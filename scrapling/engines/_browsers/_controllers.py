@@ -47,7 +47,8 @@ class DynamicSession(SyncSession, DynamicSessionMixin):
         :param network_idle: Wait for the page until there are no network connections for at least 500 ms.
         :param timeout: The timeout in milliseconds that is used in all operations and waits through the page. The default is 30,000
         :param wait: The time (milliseconds) the fetcher will wait after everything finishes before closing the page and returning the ` Response ` object.
-        :param page_action: Added for automation. A function that takes the `page` object and does the automation you need.
+        :param page_action: Added for automation. A function that takes the `page` object, runs after navigation, and does the automation you need.
+        :param page_setup: A function that takes the `page` object, runs before navigation. Use it to register event listeners or routes that must be set up before the page loads.
         :param wait_selector: Wait for a specific CSS selector to be in a specific state.
         :param init_script: An absolute path to a JavaScript file to be executed on page creation for all pages in this session.
         :param locale: Specify user locale, for example, `en-GB`, `de-DE`, etc. Locale will affect navigator.language value, Accept-Language request header value as well as number and date formatting
@@ -105,7 +106,8 @@ class DynamicSession(SyncSession, DynamicSessionMixin):
         :param google_search: Enabled by default, Scrapling will set a Google referer header.
         :param timeout: The timeout in milliseconds that is used in all operations and waits through the page. The default is 30,000
         :param wait: The time (milliseconds) the fetcher will wait after everything finishes before closing the page and returning the ` Response ` object.
-        :param page_action: Added for automation. A function that takes the `page` object and does the automation you need.
+        :param page_action: Added for automation. A function that takes the `page` object, runs after navigation, and does the automation you need.
+        :param page_setup: A function that takes the `page` object, runs before navigation. Use it to register event listeners or routes that must be set up before the page loads.
         :param extra_headers: A dictionary of extra headers to add to the request. _The referer set by `google_search` takes priority over the referer set here if used together._
         :param disable_resources: Drop requests for unnecessary resources for a speed boost.
             Requests dropped are of type `font`, `image`, `media`, `beacon`, `object`, `imageset`, `texttrack`, `websocket`, `csp_report`, and `stylesheet`.
@@ -151,6 +153,12 @@ class DynamicSession(SyncSession, DynamicSessionMixin):
                         xhr_container=xhr_captured,
                     ),
                 )
+
+                if params.page_setup:
+                    try:
+                        params.page_setup(page)
+                    except Exception as e:  # pragma: no cover
+                        log.error(f"Error executing page_setup: {e}")
 
                 try:
                     first_response = page.goto(url, referer=referer)
@@ -228,7 +236,8 @@ class AsyncDynamicSession(AsyncSession, DynamicSessionMixin):
         :param load_dom: Enabled by default, wait for all JavaScript on page(s) to fully load and execute.
         :param timeout: The timeout in milliseconds that is used in all operations and waits through the page. The default is 30,000
         :param wait: The time (milliseconds) the fetcher will wait after everything finishes before closing the page and returning the ` Response ` object.
-        :param page_action: Added for automation. A function that takes the `page` object and does the automation you need.
+        :param page_action: Added for automation. A function that takes the `page` object, runs after navigation, and does the automation you need.
+        :param page_setup: A function that takes the `page` object, runs before navigation. Use it to register event listeners or routes that must be set up before the page loads.
         :param wait_selector: Wait for a specific CSS selector to be in a specific state.
         :param init_script: An absolute path to a JavaScript file to be executed on page creation for all pages in this session.
         :param locale: Specify user locale, for example, `en-GB`, `de-DE`, etc. Locale will affect navigator.language value, Accept-Language request header value as well as number and date formatting
@@ -285,7 +294,8 @@ class AsyncDynamicSession(AsyncSession, DynamicSessionMixin):
         :param google_search: Enabled by default, Scrapling will set a Google referer header.
         :param timeout: The timeout in milliseconds that is used in all operations and waits through the page. The default is 30,000
         :param wait: The time (milliseconds) the fetcher will wait after everything finishes before closing the page and returning the ` Response ` object.
-        :param page_action: Added for automation. A function that takes the `page` object and does the automation you need.
+        :param page_action: Added for automation. A function that takes the `page` object, runs after navigation, and does the automation you need.
+        :param page_setup: A function that takes the `page` object, runs before navigation. Use it to register event listeners or routes that must be set up before the page loads.
         :param extra_headers: A dictionary of extra headers to add to the request. _The referer set by `google_search` takes priority over the referer set here if used together._
         :param disable_resources: Drop requests for unnecessary resources for a speed boost.
             Requests dropped are of type `font`, `image`, `media`, `beacon`, `object`, `imageset`, `texttrack`, `websocket`, `csp_report`, and `stylesheet`.
@@ -332,6 +342,12 @@ class AsyncDynamicSession(AsyncSession, DynamicSessionMixin):
                         xhr_container=xhr_captured,
                     ),
                 )
+
+                if params.page_setup:
+                    try:
+                        await params.page_setup(page)
+                    except Exception as e:  # pragma: no cover
+                        log.error(f"Error executing page_setup: {e}")
 
                 try:
                     first_response = await page.goto(url, referer=referer)

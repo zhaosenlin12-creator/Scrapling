@@ -6,6 +6,17 @@ from scrapling import Fetcher
 Fetcher.adaptive = True
 
 
+@pytest.fixture
+def _reset_fetcher_config():
+    """Snapshot and restore the mutable class-level parser config around a test."""
+    snapshot = {k: getattr(Fetcher, k) for k in Fetcher.parser_keywords}
+    try:
+        yield
+    finally:
+        for k, v in snapshot.items():
+            setattr(Fetcher, k, v)
+
+
 @pytest_httpbin.use_class_based_httpbin
 class TestFetcher:
     @pytest.fixture(scope="class")
@@ -119,3 +130,24 @@ class TestFetcher:
             ).status
             == 200
         )
+
+    def test_configure_propagates_to_response(self, fetcher, _reset_fetcher_config):
+        """`Fetcher.configure()` must reach the Response's Selector on the HTTP path."""
+        Fetcher.configure(adaptive=False, adaptive_domain="")
+        baseline = fetcher.get(self.html_url)
+        assert baseline._storage is None
+
+        Fetcher.configure(adaptive=True, adaptive_domain="configured.test")
+        configured = fetcher.get(self.html_url)
+        assert configured._storage is not None
+        assert configured.url == "configured.test"
+
+    def test_selector_config_overrides_configure(self, fetcher, _reset_fetcher_config):
+        """A per-request ``selector_config`` overrides the class-level configure()."""
+        Fetcher.configure(adaptive=True, adaptive_domain="from-configure.test")
+        response = fetcher.get(
+            self.html_url,
+            selector_config={"adaptive_domain": "from-request.test"},
+        )
+        assert response._storage is not None
+        assert response.url == "from-request.test"

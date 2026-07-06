@@ -1,8 +1,8 @@
 # Scrapling MCP Server
 
-The Scrapling MCP server exposes nine web scraping tools over the MCP protocol. It supports CSS-selector-based content narrowing (reducing tokens by extracting only relevant elements before returning results), three levels of scraping capability (plain HTTP, browser-rendered, and stealth/anti-bot bypass), and persistent browser session management.
+The Scrapling MCP server exposes ten tools over the MCP protocol. It supports CSS-selector-based content narrowing (reducing tokens by extracting only relevant elements before returning results), three levels of scraping capability (plain HTTP, browser-rendered, and stealth/anti-bot bypass), persistent browser session management, and page screenshots returned as real image content blocks.
 
-All scraping tools return a `ResponseModel` with fields: `status` (int), `content` (list of strings), `url` (str).
+All scraping tools return a `ResponseModel` with fields: `status` (int), `content` (list of strings), `url` (str). The `screenshot` tool returns a list of MCP content blocks: an `ImageContent` (the screenshot bytes) followed by a `TextContent` (the post-redirect URL).
 
 ## Tools
 
@@ -99,17 +99,18 @@ Opens a browser session that stays alive across multiple fetch calls, avoiding t
 
 **Key parameters:**
 
-| Parameter          | Type                        | Default      | Description                                                         |
-|--------------------|-----------------------------|--------------|---------------------------------------------------------------------|
-| `session_type`     | `"dynamic"` / `"stealthy"`  | required     | Type of browser session to create                                   |
-| `headless`         | bool                        | true         | Run browser hidden or visible                                       |
-| `max_pages`        | int                         | 5            | Max concurrent browser tabs (1-50)                                  |
-| `proxy`            | str or dict or null         | null         | Proxy for all requests in this session                              |
-| `timeout`          | number                      | 30000        | Default timeout in ms                                               |
-| `solve_cloudflare` | bool                        | false        | (Stealthy only) Auto-solve Cloudflare challenges                    |
-| `hide_canvas`      | bool                        | false        | (Stealthy only) Canvas fingerprint noise                            |
-| `block_webrtc`     | bool                        | false        | (Stealthy only) Block WebRTC IP leak                                |
-| `allow_webgl`      | bool                        | true         | (Stealthy only) Keep WebGL enabled                                  |
+| Parameter          | Type                        | Default      | Description                                                                                           |
+|--------------------|-----------------------------|--------------|-------------------------------------------------------------------------------------------------------|
+| `session_type`     | `"dynamic"` / `"stealthy"`  | required     | Type of browser session to create                                                                     |
+| `session_id`       | str or null                 | null         | Custom ID for the session. If omitted, a random 12-char hex ID is generated. Raises if already in use |
+| `headless`         | bool                        | true         | Run browser hidden or visible                                                                         |
+| `max_pages`        | int                         | 5            | Max concurrent browser tabs (1-50)                                                                    |
+| `proxy`            | str or dict or null         | null         | Proxy for all requests in this session                                                                |
+| `timeout`          | number                      | 30000        | Default timeout in ms                                                                                 |
+| `solve_cloudflare` | bool                        | false        | (Stealthy only) Auto-solve Cloudflare challenges                                                      |
+| `hide_canvas`      | bool                        | false        | (Stealthy only) Canvas fingerprint noise                                                              |
+| `block_webrtc`     | bool                        | false        | (Stealthy only) Block WebRTC IP leak                                                                  |
+| `allow_webgl`      | bool                        | true         | (Stealthy only) Keep WebGL enabled                                                                    |
 
 Plus all other browser session parameters (`google_search`, `real_chrome`, `cdp_url`, `locale`, `timezone_id`, `useragent`, `extra_headers`, `cookies`, `disable_resources`, `network_idle`, `wait_selector`, `wait_selector_state`).
 
@@ -131,6 +132,25 @@ Returns a list of `SessionInfo` objects, each with `session_id`, `session_type`,
 
 No parameters.
 
+### `screenshot` -- Capture a page screenshot
+
+Navigates to a URL inside an existing browser session and returns the screenshot as an MCP `ImageContent` block (the bytes the model can see directly, not a base64 string in JSON) followed by a `TextContent` block carrying the post-redirect URL.
+
+Requires an open browser session. Call `open_session` first, then pass the `session_id` here. Both `dynamic` and `stealthy` sessions are accepted.
+
+| Parameter             | Type                  | Default      | Description                                                                          |
+|-----------------------|-----------------------|--------------|--------------------------------------------------------------------------------------|
+| `url`                 | str                   | required     | URL to navigate to and capture                                                       |
+| `session_id`          | str                   | required     | ID of an open browser session created with `open_session`                            |
+| `image_type`          | `"png"` / `"jpeg"`    | `"png"`      | Image format. Use `"jpeg"` for smaller payloads                                      |
+| `full_page`           | bool                  | false        | Capture the full scrollable page instead of just the viewport                        |
+| `quality`             | int or null           | null         | JPEG quality 0-100. Raises if passed with `image_type="png"`                         |
+| `wait`                | number                | 0            | Extra wait (ms) after page load before capture                                       |
+| `wait_selector`       | str or null           | null         | CSS selector to wait for before capture                                              |
+| `wait_selector_state` | str                   | `"attached"` | State for `wait_selector`: `"attached"` / `"visible"` / `"hidden"` / `"detached"`    |
+| `network_idle`        | bool                  | false        | Wait until no network activity for 500ms                                             |
+| `timeout`             | number                | 30000        | Timeout in milliseconds                                                              |
+
 ## Tool selection guide
 
 | Scenario                                 | Tool                                                          |
@@ -142,6 +162,7 @@ No parameters.
 | Cloudflare or strong anti-bot protection | `stealthy_fetch` (with `solve_cloudflare=true` for Turnstile) |
 | Multiple protected pages                 | `bulk_stealthy_fetch`                                         |
 | Multiple pages from the same site        | `open_session` + `fetch`/`stealthy_fetch` with `session_id`  |
+| Need a screenshot of a page              | `open_session` + `screenshot` with `session_id`              |
 
 Start with `get` (fastest, lowest resource cost). Escalate to `fetch` if content requires JS rendering. Escalate to `stealthy_fetch` only if blocked. For multiple pages from the same site, use a persistent session to avoid browser launch overhead.
 
@@ -164,6 +185,10 @@ When `main_content_only=true` (the default), the server automatically sanitizes 
 
 Keep `main_content_only=true` for maximum protection.
 
+## Ad blocking
+
+All browser-based tools (`fetch`, `bulk_fetch`, `stealthy_fetch`, `bulk_stealthy_fetch`) and persistent sessions (`open_session`) automatically block requests to ~3,500 known ad and tracker domains. This is always enabled in the MCP server to save tokens and speed up page loads. No configuration needed.
+
 ## Setup
 
 Start the server (stdio transport, used by most MCP clients):
@@ -183,7 +208,36 @@ Docker alternative:
 
 ```bash
 docker pull pyd4vinci/scrapling
-docker run -i --rm scrapling mcp
+docker run -i --rm pyd4vinci/scrapling mcp
 ```
+
+## Custom browser executable
+
+Browser-based tools (`fetch`, `bulk_fetch`, `stealthy_fetch`, `bulk_stealthy_fetch`, and `open_session`) can use a custom Chromium-compatible browser executable instead of the bundled Chromium. This is useful for custom browser builds or lightweight browser engines.
+
+To configure it once for the whole MCP server, pass the executable path when starting the server:
+
+```bash
+scrapling mcp --executable-path "/path/to/chromium"
+```
+
+In a Claude Desktop configuration, add the option to the server arguments:
+
+```json
+{
+  "mcpServers": {
+    "ScraplingServer": {
+      "command": "/Users/<MyUsername>/.venv/bin/scrapling",
+      "args": [
+        "mcp",
+        "--executable-path",
+        "/path/to/chromium"
+      ]
+    }
+  }
+}
+```
+
+You can also set the `SCRAPLING_EXECUTABLE_PATH` environment variable before starting the server. Tool calls can still pass `executable_path` directly when a single request or session needs a different browser executable.
 
 The MCP server name when registering with a client is `ScraplingServer`. The command is the path to the `scrapling` binary and the argument is `mcp`.

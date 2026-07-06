@@ -99,6 +99,38 @@ class TestRequestProperties:
         r2 = Request("https://example.com/page2")
         assert r1.update_fingerprint() != r2.update_fingerprint()
 
+    def test_fingerprint_include_kwargs_uses_kwarg_values(self):
+        """Test kwargs with different values produce different fingerprints."""
+        r1 = Request("https://example.com", timeout=1)
+        r2 = Request("https://example.com", timeout=2)
+
+        assert r1.update_fingerprint(include_kwargs=True) != r2.update_fingerprint(include_kwargs=True)
+
+    def test_fingerprint_include_kwargs_handles_non_primitive_values(self):
+        class _Opaque:
+            def __repr__(self) -> str:
+                return "_Opaque(stable)"
+
+        opaque = _Opaque()
+        r1 = Request("https://example.com", proxies={"http": "p1"}, custom=opaque)
+        r2 = Request("https://example.com", proxies={"http": "p1"}, custom=opaque)
+        r3 = Request("https://example.com", proxies={"http": "p2"}, custom=opaque)
+
+        fp1 = r1.update_fingerprint(include_kwargs=True)
+        r2._fp = None
+        fp2 = r2.update_fingerprint(include_kwargs=True)
+        fp3 = r3.update_fingerprint(include_kwargs=True)
+
+        assert fp1 == fp2
+        assert fp1 != fp3
+
+    def test_fingerprint_include_headers_preserves_header_value_case(self):
+        """Test header values are fingerprinted without lowercasing."""
+        r1 = Request("https://example.com", headers={"X-Test": "A"})
+        r2 = Request("https://example.com", headers={"X-Test": "a"})
+
+        assert r1.update_fingerprint(include_headers=True) != r2.update_fingerprint(include_headers=True)
+
 
 class TestRequestCopy:
     """Test Request copy functionality."""

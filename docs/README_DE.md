@@ -85,6 +85,24 @@ MySpider().start()
 <table>
   <tr>
     <td width="200">
+      <a href="https://proxidize.com/?utm_source=github&utm_medium=sponsorship&utm_campaign=scrapling&utm_content=d4vinci" target="_blank" title="Clean Proxies with No Nonsense.">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/proxidize.png">
+      </a>
+    </td>
+    <td> <a href="https://proxidize.com/?utm_source=github&utm_medium=sponsorship&utm_campaign=scrapling&utm_content=d4vinci" target="_blank"><b>Proxidize</b></a> bietet mobile und Residential-Proxies für Scraping, Browser-Automatisierung, SEO-Monitoring, KI-Agenten und Datenerfassung. <i>Mit dem Code <b>scrapling20</b> erhalten Sie 20% Rabatt</i>.
+    </td>
+  </tr>
+  <tr>
+    <td width="200">
+      <a href="https://coldproxy.com/" target="_blank" title="Residential, IPv6 & Datacenter Proxies for Web Scraping">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/coldproxy.png">
+      </a>
+    </td>
+    <td> <a href="https://coldproxy.com/" target="_blank"><b>ColdProxy</b></a> bietet Residential- und Datacenter-Proxies für stabiles Web Scraping, öffentliche Datenerfassung und geografisch gezielte Tests in über 195 Ländern.
+    </td>
+  </tr>
+  <tr>
+    <td width="200">
       <a href="https://hypersolutions.co/?utm_source=github&utm_medium=readme&utm_campaign=scrapling" target="_blank" title="Bot Protection Bypass API for Akamai, DataDome, Incapsula & Kasada">
         <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/HyperSolutions.png">
       </a>
@@ -130,16 +148,6 @@ MySpider().start()
   </tr>
   <tr>
     <td width="200">
-      <a href="https://www.nsocks.com/?keyword=2p67aivg" target="_blank" title="Scalable Web Data Access for AI Applications">
-        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/nsocks.png">
-      </a>
-    </td>
-    <td>
-    <a href="https://www.nsocks.com/?keyword=2p67aivg" target="_blank">Nsocks</a> bietet schnelle Residential- und ISP-Proxies für Entwickler und Scraper. Globale IP-Abdeckung, hohe Anonymität, intelligente Rotation und zuverlässige Leistung für Automatisierung und Datenextraktion. Verwenden Sie <a href="https://www.xcrawl.com/?keyword=2p67aivg" target="_blank">Xcrawl</a>, um großflächiges Web-Crawling zu vereinfachen.
-    </td>
-  </tr>
-  <tr>
-    <td width="200">
       <a href="https://petrosky.io/d4vinci" target="_blank" title="PetroSky delivers cutting-edge VPS hosting.">
         <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/petrosky.png">
       </a>
@@ -161,22 +169,32 @@ MySpider().start()
   </tr>
   <tr>
     <td width="200">
-      <a href="https://proxy-seller.com/?partner=CU9CAA5TBYFFT2" target="_blank" title="Proxy-Seller provides reliable proxy infrastructure for Web Scraping">
-        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/ProxySeller.png">
+      <a href="https://www.swiftproxy.net/?ref=D4Vinci" target="_blank" title="Scalable Solutions for Web Data Access">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/SwiftProxy.png">
       </a>
     </td>
     <td>
-    <a href="https://proxy-seller.com/?partner=CU9CAA5TBYFFT2" target="_blank">Proxy-Seller</a> bietet zuverlässige Proxy-Infrastruktur für Web Scraping mit IPv4-, IPv6-, ISP-, Residential- und Mobile-Proxys – stabile Leistung, breite geografische Abdeckung und flexible Tarife für die Datenerfassung im Unternehmensmaßstab.
+    <a href="https://www.swiftproxy.net/?ref=D4Vinci" target="_blank">Swiftproxy</a> bietet skalierbare Residential-Proxys mit über 80 Mio. IPs in mehr als 195 Ländern und liefert schnelle, zuverlässige Verbindungen, automatische Rotation und starke Anti-Block-Leistung. Kostenlose Testversion verfügbar.
     </td>
   </tr>
   <tr>
     <td width="200">
-      <a href="http://mangoproxy.com/?utm_source=D4Vinci&utm_medium=GitHub&utm_campaign=D4Vinci" target="_blank" title="Proxies You Can Rely On: Residential, Server, and Mobile">
-        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/MangoProxy.png">
+      <a href="https://9proxy.com/pricing?tab=traffic&utm_source=Github&utm_campaign=D4vinci" target="_blank" title="Top-Tier Residential Proxy Solution for the Highest Success Rate">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/9proxy.jpg">
       </a>
     </td>
     <td>
-    <a href="http://mangoproxy.com/?utm_source=D4Vinci&utm_medium=GitHub&utm_campaign=D4Vinci" target="_blank">Stabile Proxys</a> für Scraping, Automatisierung und Multi-Accounting. Saubere IPs, schnelle Reaktionszeiten und zuverlässige Leistung unter Last. Entwickelt für skalierbare Workflows.
+    <a href="https://9proxy.com/pricing?tab=traffic&utm_source=Github&utm_campaign=D4vinci" target="_blank">9Proxy</a> bietet Residential-Proxys ab nur 0,018 $/IP oder 0,68 $/GB. Über 20 Mio. IPs in mehr als 90 Ländern. Sticky oder rotierende Sessions, verwaltet über die Desktop- oder Mobile-App.
+    </td>
+  </tr>
+  <tr>
+    <td width="200">
+      <a href="https://go.nodemaven.com/scraplingjune" target="_blank" title="Proxies with the Highest IP Scores">
+        <img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/NodeMaven.svg" width="240" height="100">
+      </a>
+    </td>
+    <td>
+    <a href="https://go.nodemaven.com/scraplingjune" target="_blank">NodeMaven</a> - zuverlässiger Proxy-Anbieter mit der höchsten IP-Qualität auf dem Markt. Nutze den Promo-Code SCRAPLING35 für 35% Rabatt auf Proxys.
     </td>
   </tr>
 </table>
@@ -191,7 +209,8 @@ MySpider().start()
 <a href="https://hasdata.com/?utm_source=github&utm_medium=banner&utm_campaign=D4Vinci" target="_blank" title="The web scraping service that actually beats anti-bot systems!"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/hasdata.png"></a>
 <a href="https://proxyempire.io/?ref=scrapling&utm_source=scrapling" target="_blank" title="Collect The Data Your Project Needs with the Best Residential Proxies"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/ProxyEmpire.png"></a>
 <a href="https://www.webshare.io/?referral_code=48r2m2cd5uz1" target="_blank" title="The Most Reliable Proxy with Unparalleled Performance"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/webshare.png"></a>
-<a href="https://www.crawleo.dev/?utm_source=github&utm_medium=sponsor&utm_campaign=scrapling" target="_blank" title="Supercharge your AI with Real-Time Web Intelligence"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/crawleo.png"></a>
+<a href="https://proxiware.com/?ref=scrapling" target="_blank" title="Collect Any Data. At Any Scale."><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/proxiware.png"></a>
+<a href="https://talordata.com/?campaignid=ZOYRsA4bX9BwWyO5&utm_source=D4Vinci&utm_term=Scrapling" target="_blank" title="Google SERP API for LLM, AI Agents & Full-Stack SEO"><img src="https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/TalorData.jpg"></a>
 
 
 <!-- /sponsors -->
@@ -219,7 +238,8 @@ MySpider().start()
 - **Anti-Bot-Umgehung**: Erweiterte Stealth-Fähigkeiten mit `StealthyFetcher` und Fingerprint-Spoofing. Kann alle Arten von Cloudflares Turnstile/Interstitial einfach mit Automatisierung umgehen.
 - **Session-Verwaltung**: Persistente Session-Unterstützung mit den Klassen `FetcherSession`, `StealthySession` und `DynamicSession` für Cookie- und Zustandsverwaltung über Anfragen hinweg.
 - **Proxy-Rotation**: Integrierter `ProxyRotator` mit zyklischen oder benutzerdefinierten Rotationsstrategien über alle Session-Typen hinweg, plus Proxy-Überschreibungen pro Anfrage.
-- **Domain-Blockierung**: Anfragen an bestimmte Domains (und deren Subdomains) in browserbasierten Fetchern blockieren.
+- **Domain- & Werbeblockierung**: Anfragen an bestimmte Domains (und deren Subdomains) blockieren oder die integrierte Werbeblockierung (~3.500 bekannte Werbe-/Tracker-Domains) in browserbasierten Fetchern aktivieren.
+- **DNS-Leak-Prävention**: Optionale DNS-over-HTTPS-Unterstützung zur Weiterleitung von DNS-Anfragen über Cloudflares DoH, um DNS-Leaks bei der Verwendung von Proxys zu verhindern.
 - **Async-Unterstützung**: Vollständige async-Unterstützung über alle Fetcher und dedizierte async Session-Klassen hinweg.
 
 ### Adaptives Scraping & KI-Integration
@@ -457,7 +477,8 @@ Scrapling erfordert Python 3.10 oder höher:
 pip install scrapling
 ```
 
-Diese Installation enthält nur die Parser-Engine und ihre Abhängigkeiten, ohne Fetcher oder Kommandozeilenabhängigkeiten.
+> [!IMPORTANT]
+> Diese Installation enthält nur die Parser-Engine und ihre Abhängigkeiten, ohne Fetcher oder Kommandozeilenabhängigkeiten. Daher führt der Import von allem aus `scrapling.fetchers` oder `scrapling.spiders`, wie in den Beispielen oben, mit dieser Installation allein zu einem `ModuleNotFoundError`. Wenn Sie einen der Fetcher oder Spider verwenden möchten, installieren Sie zuerst die Fetcher-Abhängigkeiten wie unten gezeigt.
 
 ### Optionale Abhängigkeiten
 

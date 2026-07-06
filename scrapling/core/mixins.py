@@ -26,7 +26,12 @@ class SelectorsGeneration:
             if target.parent:
                 if target.attrib.get("id"):
                     # id is enough
-                    part = f"#{target.attrib['id']}" if css else f"[@id='{target.attrib['id']}']"
+                    if css:
+                        part = f"#{target.attrib['id']}"
+                    elif full_path:
+                        part = f"*[@id='{target.attrib['id']}']"
+                    else:
+                        part = f"[@id='{target.attrib['id']}']"
                     selectorPath.append(part)
                     if not full_path:
                         return " > ".join(reversed(selectorPath)) if css else "//*" + "/".join(reversed(selectorPath))
@@ -47,7 +52,7 @@ class SelectorsGeneration:
                     if counter[target.tag] > 1:
                         part += f":nth-of-type({counter[target.tag]})" if css else f"[{counter[target.tag]}]"
 
-                selectorPath.append(part)
+                    selectorPath.append(part)
                 target = target.parent
                 if target is None or target.tag == "html":
                     return " > ".join(reversed(selectorPath)) if css else "//" + "/".join(reversed(selectorPath))

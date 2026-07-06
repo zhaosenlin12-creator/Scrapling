@@ -15,13 +15,16 @@ class DynamicFetcher(BaseFetcher):
         :param headless: Run the browser in headless/hidden (default), or headful/visible mode.
         :param disable_resources: Drop requests for unnecessary resources for a speed boost.
         :param blocked_domains: A set of domain names to block requests to. Subdomains are also matched (e.g., ``"example.com"`` blocks ``"sub.example.com"`` too).
+        :param block_ads: Block requests to ~3,500 known ad/tracking domains. Can be combined with ``blocked_domains``.
+        :param dns_over_https: Route DNS queries through Cloudflare's DNS-over-HTTPS to prevent DNS leaks when using proxies.
         :param useragent: Pass a useragent string to be used. Otherwise the fetcher will generate a real Useragent of the same browser and use it.
         :param cookies: Set cookies for the next request.
         :param network_idle: Wait for the page until there are no network connections for at least 500 ms.
         :param load_dom: Enabled by default, wait for all JavaScript on page(s) to fully load and execute.
         :param timeout: The timeout in milliseconds that is used in all operations and waits through the page. The default is 30,000
         :param wait: The time (milliseconds) the fetcher will wait after everything finishes before closing the page and returning the Response object.
-        :param page_action: Added for automation. A function that takes the `page` object and does the automation you need.
+        :param page_action: Added for automation. A function that takes the `page` object, runs after navigation, and does the automation you need.
+        :param page_setup: A function that takes the `page` object, runs before navigation. Use it to register event listeners or routes that must be set up before the page loads.
         :param wait_selector: Wait for a specific CSS selector to be in a specific state.
         :param init_script: An absolute path to a JavaScript file to be executed on page creation with this request.
         :param locale: Set the locale for the browser if wanted. Defaults to the system default locale.
@@ -55,13 +58,16 @@ class DynamicFetcher(BaseFetcher):
         :param headless: Run the browser in headless/hidden (default), or headful/visible mode.
         :param disable_resources: Drop requests for unnecessary resources for a speed boost.
         :param blocked_domains: A set of domain names to block requests to. Subdomains are also matched (e.g., ``"example.com"`` blocks ``"sub.example.com"`` too).
+        :param block_ads: Block requests to ~3,500 known ad/tracking domains. Can be combined with ``blocked_domains``.
+        :param dns_over_https: Route DNS queries through Cloudflare's DNS-over-HTTPS to prevent DNS leaks when using proxies.
         :param useragent: Pass a useragent string to be used. Otherwise the fetcher will generate a real Useragent of the same browser and use it.
         :param cookies: Set cookies for the next request.
         :param network_idle: Wait for the page until there are no network connections for at least 500 ms.
         :param load_dom: Enabled by default, wait for all JavaScript on page(s) to fully load and execute.
         :param timeout: The timeout in milliseconds that is used in all operations and waits through the page. The default is 30,000
         :param wait: The time (milliseconds) the fetcher will wait after everything finishes before closing the page and returning the Response object.
-        :param page_action: Added for automation. A function that takes the `page` object and does the automation you need.
+        :param page_action: Added for automation. A function that takes the `page` object, runs after navigation, and does the automation you need.
+        :param page_setup: A function that takes the `page` object, runs before navigation. Use it to register event listeners or routes that must be set up before the page loads.
         :param wait_selector: Wait for a specific CSS selector to be in a specific state.
         :param init_script: An absolute path to a JavaScript file to be executed on page creation with this request.
         :param locale: Set the locale for the browser if wanted. Defaults to the system default locale.

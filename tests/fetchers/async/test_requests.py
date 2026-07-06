@@ -6,6 +6,17 @@ from scrapling.fetchers import AsyncFetcher
 AsyncFetcher.adaptive = True
 
 
+@pytest.fixture
+def _reset_async_fetcher_config():
+    """Snapshot and restore the mutable class-level parser config around a test."""
+    snapshot = {k: getattr(AsyncFetcher, k) for k in AsyncFetcher.parser_keywords}
+    try:
+        yield
+    finally:
+        for k, v in snapshot.items():
+            setattr(AsyncFetcher, k, v)
+
+
 @pytest_httpbin.use_class_based_httpbin
 @pytest.mark.asyncio
 class TestAsyncFetcher:
@@ -124,3 +135,28 @@ class TestAsyncFetcher:
                 timeout=None,
             )
         ).status == 200
+
+    async def test_configure_propagates_to_response(
+        self, fetcher, urls, _reset_async_fetcher_config
+    ):
+        """`AsyncFetcher.configure()` must reach the Response's Selector on the HTTP path."""
+        AsyncFetcher.configure(adaptive=False, adaptive_domain="")
+        baseline = await fetcher.get(urls["html_url"])
+        assert baseline._storage is None
+
+        AsyncFetcher.configure(adaptive=True, adaptive_domain="configured.test")
+        configured = await fetcher.get(urls["html_url"])
+        assert configured._storage is not None
+        assert configured.url == "configured.test"
+
+    async def test_selector_config_overrides_configure(
+        self, fetcher, urls, _reset_async_fetcher_config
+    ):
+        """A per-request ``selector_config`` overrides the class-level configure()."""
+        AsyncFetcher.configure(adaptive=True, adaptive_domain="from-configure.test")
+        response = await fetcher.get(
+            urls["html_url"],
+            selector_config={"adaptive_domain": "from-request.test"},
+        )
+        assert response._storage is not None
+        assert response.url == "from-request.test"

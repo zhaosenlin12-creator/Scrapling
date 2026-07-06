@@ -4,13 +4,12 @@
 
 ### All current types can be imported alone, like below
 ```python
->>> from scrapling.core.custom_types import TextHandler, AttributesHandler
+from scrapling.core.custom_types import TextHandler, AttributesHandler
 
->>> somestring = TextHandler('{}')
->>> somestring.json()
-'{}'
->>> somedict_1 = AttributesHandler({'a': 1})
->>> somedict_2 = AttributesHandler(a=1)
+somestring = TextHandler('{}')
+somestring.json()  # '{}'
+somedict_1 = AttributesHandler({'a': 1})
+somedict_2 = AttributesHandler(a=1)
 ```
 
 Note that `TextHandler` is a subclass of Python's `str`, so all standard operations/methods that work with Python strings will work.
